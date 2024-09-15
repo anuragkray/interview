@@ -1,0 +1,15 @@
+.app-container{
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    background-color: lightgray;
+}
+.app-container-item{
+    width: 60%;
+    height: 90%;
+    background-color: rgb(255,255,255,0.8);
+}
+h4{
+    text-align: center;
+}
