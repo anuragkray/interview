@@ -43,7 +43,7 @@ const ToDo = (props: ToDoProps) => {
         onChange={handleUserInput}
       />
       <div>
-        <button>Submit</button>
+        <button type="submit">Submit</button>
       </div>
     </form>
   );
@@ -63,10 +63,10 @@ export const CardComponent = ({
   onEdit,
 }: CardComponentProps) => {
   const handleDelete = (id: string) => {
-    onEdit(id);
+    onDelete(id);
   };
   const handleEdit = (id: string) => {
-    onDelete(id);
+    onEdit(id);
   };
   return (
     <div className={ToDoStyle["custom-card"]}>

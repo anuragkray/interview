@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import AppStyle from "./App.module.css";
 import ToDo, { CardComponent } from "./components/todo/todo";
 
@@ -32,7 +32,7 @@ function App() {
     [editId]
   );
   // To handle delete data
-  const handleDelete = useCallback((id: string) => {
+  const deleteHandler = useCallback((id: string) => {
     setFormData((prevData) => prevData.filter((item) => item.id !== id));
   }, []);
 
@@ -67,9 +67,9 @@ function App() {
             {formData.map((element) => (
               <CardComponent
                 key={element.id}
-                name={element.name}
                 id={element.id}
-                onDelete={handleDelete}
+                name={element.name}
+                onDelete={deleteHandler}
                 onEdit={editHandler}
               />
             ))}
