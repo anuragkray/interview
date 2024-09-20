@@ -1,6 +1,7 @@
 import { useCallback, useState } from "react";
 import AppStyle from "./App.module.css";
 import ToDo, { CardComponent } from "./components/todo/todo";
+import Searching from "./components/searching/searching";
 
 interface TODODataProps {
   id: string;
@@ -59,6 +60,8 @@ function App() {
               editValue={editedValue}
               setEditedValue={setEditedValue}
             />
+            {/* SEARCHING COMPONENT */}
+            <Searching />
           </section>
           {/* SECTION_2 */}
           <div className={AppStyle["divider"]}></div>
