@@ -1,7 +1,7 @@
 import { useCallback, useState } from "react";
 import AppStyle from "./App.module.css";
-import ToDo, { CardComponent } from "./components/todo/todo";
-import Searching from "./components/searching/searching";
+import ToDo, { CardComponent } from "./components/react/todo/todo";
+import Searching from "./components/react/searching/searching";
 
 interface TODODataProps {
   id: string;
