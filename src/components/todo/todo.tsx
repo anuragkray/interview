@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent } from "react";
 import ToDoStyle from "./todo.module.css";
 
 interface UserInputProps {
@@ -6,6 +6,7 @@ interface UserInputProps {
   value: string;
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
 }
+
 //Input component: We can also create in another file
 const UserInput = ({ labelName, value, onChange }: UserInputProps) => {
   return (
@@ -15,15 +16,15 @@ const UserInput = ({ labelName, value, onChange }: UserInputProps) => {
     </div>
   );
 };
+
 //Main TODO Component
 interface ToDoProps {
   ToDoDatahandler: (data: string) => void;
   editValue: string;
   setEditedValue: (value: string) => void;
 }
-const ToDo = (props: ToDoProps) => {
-  const [userInput, setUserInput] = useState<string>("");
 
+const ToDo = (props: ToDoProps) => {
   const handleUserInput = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
     props.setEditedValue(value);
@@ -34,7 +35,7 @@ const ToDo = (props: ToDoProps) => {
     props.ToDoDatahandler(props.editValue);
     props.setEditedValue("");
   };
-  console.log("editevalue", props.editValue);
+
   return (
     <form className={ToDoStyle["todo-form"]} onSubmit={handSubmit}>
       <UserInput
