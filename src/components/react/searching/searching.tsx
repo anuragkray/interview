@@ -75,7 +75,7 @@ const Searching = () => {
         ? searchData
         : ["No data found"]
       : searchList;
-  }, [deferedSearch]);
+  }, [deferedSearch, searchList]);
 
   return (
     <div>
