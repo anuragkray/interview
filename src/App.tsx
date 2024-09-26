@@ -2,6 +2,8 @@ import { useCallback, useState } from "react";
 import AppStyle from "./App.module.css";
 import ToDo, { CardComponent } from "./components/react/todo/todo";
 import Searching from "./components/react/searching/searching";
+import CountDown from "./components/react/countdown/CountDown";
+import Timer from "./components/react/timer/Timer";
 
 interface TODODataProps {
   id: string;
@@ -62,6 +64,8 @@ function App() {
             />
             {/* SEARCHING COMPONENT */}
             <Searching />
+            {/* Count Down Timer */}
+            <CountDown />
           </section>
           {/* SECTION_2 */}
           <div className={AppStyle["divider"]}></div>
@@ -76,6 +80,7 @@ function App() {
                 onEdit={editHandler}
               />
             ))}
+            <Timer />
           </section>
         </div>
       </section>
