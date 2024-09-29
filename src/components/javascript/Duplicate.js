@@ -5,7 +5,6 @@ let result = "";
 for (let char of duplicate) {
   if (!result.includes(char)) result += char;
 }
-// console.log(result);
 
 /**---------------------------------------------- */
 //METHOD_2
@@ -13,7 +12,27 @@ const result_1 = Array.from(duplicate).reduce((acc, cur) => {
   if (!acc.includes(cur)) acc += cur;
   return acc;
 }, "");
-// console.log(result_1);
+
+//Method_3 without any inbuilt methods
+function removeDuplicate(duplicateString) {
+  const len = duplicateString.length;
+  let result = "";
+  // If you want to remove duplicate from Array intilize
+  //With empty array and and push it in the last
+  //Looping over the string
+  for (let outer = 0; outer < len; outer++) {
+    let breakingFlag = false;
+    for (let inner = 0; inner < result.length; inner++) {
+      if (duplicateString[outer] === result[inner]) {
+        breakingFlag = true;
+        break;
+      }
+    }
+    if (!breakingFlag) result += duplicateString[outer];
+  }
+  return result;
+}
+console.log(removeDuplicate(duplicate));
 
 /**--------------ARRAY---------------------------- */
 const duplicateArray = [1, 2, 3, 6, 9, 3, 6, 9, 5, 6, 4, 3, 5, 8, 7, 8];
