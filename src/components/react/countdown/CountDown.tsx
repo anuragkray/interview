@@ -8,6 +8,7 @@ const helperTimer = (totalTime: number) => {
     "0"
   )}`;
 };
+
 //Main Component
 const CountDown = () => {
   const [counter, setCounter] = useState(119);

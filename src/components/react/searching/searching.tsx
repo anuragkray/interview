@@ -10,10 +10,10 @@ import {
 export const useDebounce = (value: string, time: number) => {
   const [state, setState] = useState<string>("");
   useEffect(() => {
-    const interval = setInterval(() => {
+    const interval = setTimeout(() => {
       setState(value);
     }, time);
-    return () => clearInterval(interval);
+    return () => clearTimeout(interval);
   }, [value]);
   return state;
 };
@@ -31,11 +31,11 @@ const CustomSearchComponent = ({
   value,
   name,
 }: CusSearchProps) => {
-  const deferValue = useDeferredValue(value);
+  // const deferValue = useDeferredValue(value);
   return (
     <>
       <label htmlFor="searchData">{labelName}</label>
-      <input name={name} type="search" value={deferValue} onChange={onChange} />
+      <input name={name} type="search" value={value} onChange={onChange} />
     </>
   );
 };
@@ -44,7 +44,9 @@ const CustomSearchComponent = ({
 const Searching = () => {
   const [searchInput, setSearchInput] = useState<string>("");
   const [searchList, setSearchList] = useState<string[]>([]);
-  const deferedSearch = useDebounce(searchInput, 1000);
+  const deferedSearch = useDebounce(searchInput, 500);
+  const [loading, setLoading] = useState<boolean>(false);
+
   //Fetching SearchList from API
   useEffect(() => {
     (async () => {
@@ -61,8 +63,10 @@ const Searching = () => {
 
   const handleSearchData = (event: ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
+    setLoading(true);
     const { value } = event.target;
     setSearchInput(value);
+    setLoading(false);
   };
 
   //Searching logic
@@ -70,12 +74,24 @@ const Searching = () => {
     const searchData = searchList.filter((element) =>
       element.toLowerCase().includes(deferedSearch.toLowerCase())
     );
+
     return deferedSearch
       ? searchData.length > 0
         ? searchData
         : ["No data found"]
       : searchList;
   }, [deferedSearch, searchList]);
+
+  // Handle loading state for search
+  useEffect(() => {
+    if (deferedSearch) {
+      setLoading(true);
+      const timeoutId = setTimeout(() => {
+        setLoading(false);
+      }, 100); // Set loading for 500ms after searching
+      return () => clearTimeout(timeoutId);
+    }
+  }, [deferedSearch]);
 
   return (
     <div>
@@ -85,11 +101,15 @@ const Searching = () => {
         value={searchInput}
         onChange={handleSearchData}
       />
-      {searchListForRender.map((element) => (
-        <div key={element} style={{ border: "1px dashed pink" }}>
-          <h3>{element}</h3>
-        </div>
-      ))}
+      {!loading ? (
+        searchListForRender.map((element) => (
+          <div key={element} style={{ border: "1px dashed pink" }}>
+            <h3>{element}</h3>
+          </div>
+        ))
+      ) : (
+        <p>Searching...</p>
+      )}
     </div>
   );
 };
