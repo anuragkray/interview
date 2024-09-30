@@ -4,6 +4,7 @@ import ToDo, { CardComponent } from "./components/react/todo/todo";
 import Searching from "./components/react/searching/searching";
 import CountDown from "./components/react/countdown/CountDown";
 import Timer from "./components/react/timer/Timer";
+import Sort from "./components/react/sorting/Sorting";
 
 interface TODODataProps {
   id: string;
@@ -66,6 +67,7 @@ function App() {
             <Searching />
             {/* Count Down Timer */}
             <CountDown />
+            <Sort />
           </section>
           {/* SECTION_2 */}
           <div className={AppStyle["divider"]}></div>
