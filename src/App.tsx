@@ -5,6 +5,7 @@ import Searching from "./components/react/searching/searching";
 import CountDown from "./components/react/countdown/CountDown";
 import Timer from "./components/react/timer/Timer";
 import Sort from "./components/react/sorting/Sorting";
+import Pagination from "./components/react/pagination/pagination";
 
 interface TODODataProps {
   id: string;
@@ -51,42 +52,47 @@ function App() {
     [formData]
   );
   return (
-    <main className={AppStyle["app-container"]}>
-      <section className={AppStyle["app-container-item"]}>
-        {/* HEADING */}
-        <h4>Interview question solution</h4>
-        <div className={AppStyle["app-container-section"]}>
-          {/* SECTION_1 */}
-          <section className={AppStyle["section-item"]}>
-            <ToDo
-              ToDoDatahandler={handleToDoData}
-              editValue={editedValue}
-              setEditedValue={setEditedValue}
-            />
-            {/* SEARCHING COMPONENT */}
-            <Searching />
-            {/* Count Down Timer */}
-            <CountDown />
-            <Sort />
-          </section>
-          {/* SECTION_2 */}
-          <div className={AppStyle["divider"]}></div>
-          {/* SECTION_3 */}
-          <section className={AppStyle["section-item"]}>
-            {formData.map((element) => (
-              <CardComponent
-                key={element.id}
-                id={element.id}
-                name={element.name}
-                onDelete={deleteHandler}
-                onEdit={editHandler}
+    <div className={AppStyle["main__container"]}>
+      <main className={AppStyle["app-container"]}>
+        <section className={AppStyle["app-container-item"]}>
+          {/* HEADING */}
+          <h4>Interview question solution</h4>
+          <div className={AppStyle["app-container-section"]}>
+            {/* SECTION_1 */}
+            <section className={AppStyle["section-item"]}>
+              <ToDo
+                ToDoDatahandler={handleToDoData}
+                editValue={editedValue}
+                setEditedValue={setEditedValue}
               />
-            ))}
-            <Timer />
-          </section>
-        </div>
-      </section>
-    </main>
+              {/* SEARCHING COMPONENT */}
+              <Searching />
+              {/* Count Down Timer */}
+              <CountDown />
+              <Sort />
+            </section>
+            {/* SECTION_2 */}
+            <div className={AppStyle["divider"]}></div>
+            {/* SECTION_3 */}
+            <section className={AppStyle["section-item"]}>
+              {formData.map((element) => (
+                <CardComponent
+                  key={element.id}
+                  id={element.id}
+                  name={element.name}
+                  onDelete={deleteHandler}
+                  onEdit={editHandler}
+                />
+              ))}
+              <Timer />
+            </section>
+          </div>
+          <div>
+            <Pagination />
+          </div>
+        </section>
+      </main>
+    </div>
   );
 }
 
