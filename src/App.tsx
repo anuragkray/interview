@@ -6,6 +6,7 @@ import CountDown from "./components/react/countdown/CountDown";
 import Timer from "./components/react/timer/Timer";
 import Sort from "./components/react/sorting/Sorting";
 import Pagination from "./components/react/pagination/pagination";
+import DependentDropdown from "./components/react/depDropdown/DepDropdown";
 
 interface TODODataProps {
   id: string;
@@ -89,6 +90,7 @@ function App() {
           </div>
           <div>
             <Pagination />
+            <DependentDropdown />
           </div>
         </section>
       </main>
