@@ -1,39 +1,38 @@
 //To get the second larget number from the array
 /**
  *
- * For getting smallest number initilize the value with Infinity not with -Infinity
+ * For getting smallest number initilize the value with Infinity not with -Infinity & reverse the operator
  * Reverse all the operator jsut opposite.
  */
 function getSecondLargestNumber(storage) {
-  let first = -Infinity;
-  let second = -Infinity;
+  let [first, second] = [-Infinity, -Infinity];
 
   //Looping over the array
   for (let item of storage) {
     if (item > first) {
-      second = first;
-      first = item;
-    } else if (item > second && item < first) second = item;
+      [first, second] = [item, first];
+    } else if (item > second && item < first) {
+      second = item;
+    }
   }
   return second;
 }
-console.log(getSecondLargestNumber([23, 10, -1, 34, 100, 999]));
+console.log(getSecondLargestNumber([23, 10, -1, 34, -100, 999]));
+// OUTPUT : 34
 
 //TO GET third largest
 function getThirdLargestNumber(storage) {
-  let first = -Infinity;
-  let second = -Infinity;
-  let third = -Infinity;
+ 
+  let [first,second,third]=[-Infinity,-Infinity,-Infinity]
 
   //Looping over the array
   for (let item of storage) {
     if (item > first) {
-      third = second;
-      second = first;
-      first = item;
+      [first,second,third]=[item,third,second]
     } else if (item > second && item < first) {
       third = second;
       second = item;
+      [second,third]=[item,second]
     } else if (item > third && item < second) {
       third = item;
     }
@@ -41,3 +40,4 @@ function getThirdLargestNumber(storage) {
   return third;
 }
 console.log(getThirdLargestNumber([-5, -90, -2, 34, -1, 84]));
+//OUTPUT : -1
