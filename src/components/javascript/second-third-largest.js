@@ -28,10 +28,8 @@ function getThirdLargestNumber(storage) {
   //Looping over the array
   for (let item of storage) {
     if (item > first) {
-      [first,second,third]=[item,third,second]
+      [first, second, third] = [item, first, second]
     } else if (item > second && item < first) {
-      third = second;
-      second = item;
       [second,third]=[item,second]
     } else if (item > third && item < second) {
       third = item;
@@ -39,5 +37,5 @@ function getThirdLargestNumber(storage) {
   }
   return third;
 }
-console.log(getThirdLargestNumber([-5, -90, -2, 34, -1, 84]));
-//OUTPUT : -1
+console.log(getThirdLargestNumber([-5, -90, -2, 34, -1, 84, 90]));
+//OUTPUT : 34
