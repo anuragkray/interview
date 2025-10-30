@@ -10,6 +10,8 @@ const OPEN_AI={
    companyName: "OpenAI",
    model : "GPT 5",
    softwareBot: function(botName,purpose){
+       //this always refers to who is calling the function, not where it’s defined.
+       //that's why we are using OPEN_AI.model
     console.log(`${botName} of ${this.companyName} using ${OPEN_AI.model} for the ${purpose}`)
    }
 }
