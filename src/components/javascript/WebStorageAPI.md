@@ -21,10 +21,11 @@ Session Storage maintains a separate storage area where data is stored temporari
 
 ```javascript
 // Setting data
-sessionStorage.setItem("key", "value");
+sessionStorage.setItem("key", JSON.stringify({name:"",value:null}));
 
 // Getting data
-sessionStorage.getItem("key");
+const storage = sessionStorage.getItem("key");
+const data = JSON.parse(storage);
 
 // Removing specific item
 sessionStorage.removeItem("key");

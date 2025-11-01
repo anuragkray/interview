@@ -7,6 +7,7 @@ import Timer from "./components/react/timer/Timer";
 import Sort from "./components/react/sorting/Sorting";
 import Pagination from "./components/react/pagination/pagination";
 import DependentDropdown from "./components/react/depDropdown/DepDropdown";
+import UseCallbackExample from "./hooks/use-callback";
 
 interface TODODataProps {
   id: string;
@@ -92,6 +93,10 @@ function App() {
             <Pagination />
             <DependentDropdown />
           </div>
+        </section>
+        <section>
+          {/* Use Callback explanation */}
+          <UseCallbackExample />
         </section>
       </main>
     </div>
