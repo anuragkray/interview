@@ -10,17 +10,17 @@
 
 Stop when no swaps are needed — meaning the array is sorted.
  */
-const arr_bubble_sort = [100, -1, 99, -14, 999, -5];
+const ary_1 = [100, -1, 99, -14, 999, -5];
 
-for (let outer = 0; outer < arr_bubble_sort.length - 1; outer++) {
-  for (let inner = 0; inner < arr_bubble_sort.length - outer - 1; inner++) {
-    if (arr_bubble_sort[inner] > arr_bubble_sort[inner + 1]) {
-      [arr_bubble_sort[inner], arr_bubble_sort[inner + 1]] = [arr_bubble_sort[inner + 1], arr_bubble_sort[inner]];
+for (let outer = 0; outer < ary_1.length - 1; outer++) {
+  for (let inner = 0; inner < ary_1.length - outer - 1; inner++) {
+    if (ary_1[inner] > ary_1[inner + 1]) {
+      [ary_1[inner], ary_1[inner + 1]] = [ary_1[inner + 1], ary_1[inner]];
     }
   }
 }
 
-console.log(arr_bubble_sort);
+console.log(ary_1);
 //OUTPUT : [ -14, -5, -1, 99, 100, 999 ]
 
 /* ⚙️ How Insertion Sort Works (Step-by-Step)
@@ -30,40 +30,28 @@ console.log(arr_bubble_sort);
   4.Insert the current element into its correct position.
   5.Repeat until the entire array is sorted.
 */
-const arr_for_insertion_sort = [5, 3, 8, 4, 2];
+const ary_2 = [5, 3, 8, 4, 2];
 
-for (let i = 1; i < arr_for_insertion_sort.length; i++) {
-  let current = arr_for_insertion_sort[i];
-  let j;
-
-  // inner for loop for shifting elements
-  for (j = i - 1; j >= 0 && arr_for_insertion_sort[j] > current; j--) {
-    arr_for_insertion_sort[j + 1] = arr_for_insertion_sort[j];
-  }
-
-  // insert current element at the right position
-  arr_for_insertion_sort[j + 1] = current;
-}
-
-console.log(arr_for_insertion_sort);
 
 //Selection sort
-const numberArray_1 = [100,-1,99,-14,999,-5,500,34];
-for(let firstLoopIndex=0;firstLoopIndex<numberArray_1.length;firstLoopIndex++){
-    let getIndex = firstLoopIndex;
-    for (
-      let secondLoopIndex = firstLoopIndex + 1;
-      secondLoopIndex < numberArray_1.length;
-      secondLoopIndex++
-    ) {
-      if (numberArray_1[secondLoopIndex] < numberArray_1[getIndex]) {
-        getIndex = secondLoopIndex;
-      }
+/**
+ * Selection sort state that pick the
+ * smallest number from array and swap
+ * it with zero index and continue the
+ * Iteration till array sorted.
+ */
+const ary_3 = [100, -1, 99, -14, 999, -5, 500, 34];
+
+for (let otr = 0; otr < ary_3.length; otr++) {
+  //First time consider first
+  //index as smallest
+  let smlst = otr;
+  for (let inr = otr + 1; inr < ary_3.length; inr++) {
+    if (ary_3[inr] < ary_3[smlst]) {
+      //Find the smallest index
+      smlst = inr
     }
-    //Swap inside the first loop
-    [numberArray_1[firstLoopIndex], numberArray_1[getIndex]] = [
-      numberArray_1[getIndex],
-      numberArray_1[firstLoopIndex],
-    ];
+  }
+  [ary_3[otr], ary_3[smlst]] = [ary_3[smlst], ary_3[otr]]
 }
-console.log(numberArray_1);
+console.log(ary_3);
