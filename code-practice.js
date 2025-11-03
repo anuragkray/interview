@@ -1,15 +1,23 @@
-const object = {
-    A: { B: 2, C: { D: 2, E: { F: 2, G: 3 } } }
-}
-console.log(Object.entries(object));
+// Sliding window
+function longestSubstring(parameter) {
+    const seen = new Set();
+    let left = 0;
+    let longestString = "";
 
-function flattenObject(objParams, parentkey = "") {
-    return Object.entries(objParams).reduce((acc, [key, value]) => {
-        const updatedKey = parentkey ? `${parentkey}.${key}` : key;
+    for (let right = 0; right < parameter.length; right++) {
+        const char = parameter[right];
 
-        return (typeof value === "object" && value !== null) 
-            ? { ...acc, ...flattenObject(value, updatedKey) }
-            : { ...acc, [updatedKey]: value };
-    }, {})
+        while (seen.has(char)) {
+            seen.delete(parameter[left])
+            left++
+        }
+        seen.add(char);
+
+        const current = parameter.slice(left, right + 1);
+        if (current.length > longestString.length) {
+            longestString = current
+        }
+    }
+    return longestString;
 }
-console.log(flattenObject(object))
+console.log(longestSubstring("abcdade"))
