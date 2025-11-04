@@ -3,6 +3,14 @@
 //Time Com: O(n);
 //Space Com: O(n);
 function longestSubstring(parameter){
+    /**
+     * Why Set?
+~A Set in JavaScript stores unique values only.
+~It gives O(1) (constant-time) operations for:
+~Checking if an element exists → set.has(char)
+~Adding a new element → set.add(char)
+~Removing an element → set.delete(char)
+     */
     const seen = new Set();
     let left=0;
     let lngstStrng="";
@@ -27,3 +35,29 @@ function longestSubstring(parameter){
 //Input : aabaabcdaeae
 //Output : bcdae
 console.log(longestSubstring("aabaabcdaeae"))
+
+//# Without Set Map
+function longestSubstring_1(parameter) {
+    let seen = {}; // store last seen index of each char
+    let left = 0;
+    let result = "";
+
+    for (let right = 0; right < parameter.length; right++) {
+        const char = parameter[right];
+
+        if (seen[char] >= left) {
+            // move left pointer right after last occurrence
+            left = seen[char] + 1;
+        }
+        seen[char] = right;
+
+        const current = parameter.slice(left, right + 1);
+        if (current.length > result.length) {
+            result = current;
+        }
+    }
+
+    return result;
+}
+
+console.log(longestSubstring_1("abcabcdecceae"));

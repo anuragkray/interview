@@ -1,23 +1,26 @@
-// Sliding window
 function longestSubstring(parameter) {
-    const seen = new Set();
+    let seen = {}; // store last seen index of each char
     let left = 0;
-    let longestString = "";
+    let result = "";
 
     for (let right = 0; right < parameter.length; right++) {
         const char = parameter[right];
 
-        while (seen.has(char)) {
-            seen.delete(parameter[left])
-            left++
+        if (seen[char] >= left) {
+            // move left pointer right after last occurrence
+            left = seen[char] + 1;
+            console.log("I am left", left);
         }
-        seen.add(char);
+        console.log("SEEN", seen);
+        seen[char] = right;
 
         const current = parameter.slice(left, right + 1);
-        if (current.length > longestString.length) {
-            longestString = current
+        if (current.length > result.length) {
+            result = current;
         }
     }
-    return longestString;
+
+    return result;
 }
-console.log(longestSubstring("abcdade"))
+
+console.log(longestSubstring("abcabcdecceae"));
