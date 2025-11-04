@@ -34,7 +34,7 @@ function longestSubstring(parameter){
 }
 //Input : aabaabcdaeae
 //Output : bcdae
-console.log(longestSubstring("aabaabcdaeae"))
+console.log(longestSubstring("abcabcdecceae"))
 
 //# Without Set Map
 function longestSubstring_1(parameter) {
@@ -61,3 +61,27 @@ function longestSubstring_1(parameter) {
 }
 
 console.log(longestSubstring_1("abcabcdecceae"));
+
+//Using Array
+function longestSubstringArray(parameter) {
+    const seen = []; // stores characters currently in the window
+    let result = "";
+
+    for (let char of parameter) {
+        // If duplicate found, remove chars from start until unique
+        while (seen.includes(char)) {
+            seen.shift(); // remove first character
+        }
+
+        seen.push(char); // add new character
+
+        // Update result if current window is longer
+        if (seen.length > result.length) {
+            result = seen.join("");
+        }
+    }
+
+    return result;
+}
+
+console.log(longestSubstringArray("abcabcdecceae"));
