@@ -21,7 +21,7 @@ const listItemStyle: React.CSSProperties = {
   width: "120px",
   padding: "10px 0",
   borderRadius: "8px",
-  boxShadow: "0 2px 6px rgba(0,0,0,0.2)",
+  boxShadow: "0 2px 6px",
   fontWeight: "bold",
   textAlign: "center",
 };
