@@ -1,76 +1,199 @@
 import { useState } from "react";
 import "./styles.css";
 
-const nameList = [
-  { id: "1", name: "Anurag" },
-  { id: "2", name: "Vinit" },
-];
+// --- Styles Object ---
+const styles = {
+  app: {
+    fontFamily: "sans-serif",
+    maxWidth: "400px",
+    margin: "50px auto",
+    textAlign: "center" as const,
+    backgroundColor: "#f9f9f9",
+    borderRadius: "10px",
+    padding: "20px",
+    boxShadow: "0 4px 10px rgba(0, 0, 0, 0.1)",
+  },
+  heading: {
+    color: "#333",
+    marginBottom: "20px",
+  },
+  label: {
+    display: "block",
+    fontWeight: "bold",
+    marginBottom: "8px",
+  },
+  inputContainer: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    gap: "10px",
+    marginBottom: "20px",
+  },
+  input: {
+    padding: "10px",
+    width: "60%",
+    border: "2px solid #ccc",
+    borderRadius: "6px",
+    fontSize: "14px",
+    outline: "none",
+    transition: "0.3s",
+  },
+  button: {
+    padding: "10px 16px",
+    border: "none",
+    borderRadius: "6px",
+    backgroundColor: "#007bff",
+    color: "#fff",
+    cursor: "pointer",
+    fontSize: "14px",
+    transition: "0.3s",
+  },
+  buttonHover: {
+    backgroundColor: "#0056b3",
+  },
+  list: {
+    listStyle: "none",
+    padding: 0,
+    marginTop: "10px",
+  },
+  listItem: {
+    border: "2px solid #ccc",
+    borderRadius: "8px",
+    padding: "10px",
+    marginBottom: "10px",
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    backgroundColor: "#fff",
+  },
+  itemButtons: {
+    display: "flex",
+    gap: "6px",
+  },
+  editButton: {
+    backgroundColor: "#ffc107",
+    border: "none",
+    borderRadius: "6px",
+    color: "#000",
+    padding: "6px 10px",
+    cursor: "pointer",
+  },
+  deleteButton: {
+    backgroundColor: "#dc3545",
+    border: "none",
+    borderRadius: "6px",
+    color: "#fff",
+    padding: "6px 10px",
+    cursor: "pointer",
+  },
+};
 
-export default function App() {
-  const [list, setList] = useState(nameList);
-  const [enterName, setEnterName] = useState("");
-  const [editID, setEditID] = useState<string | null>(null);
+// --- Component ---
+const initialData = Array.from({ length: 2 }, (_, index) => ({
+  id: index + 1,
+  name: `Friend ${index + 1}`,
+}));
 
-  // Handle name input
-  const handleName = (event: any) => {
-    setEnterName(event.target.value);
-  };
+export default function SimpleToDo() {
+  const [data, setData] = useState(initialData);
+  const [inputValue, setInputValue] = useState("");
+  const [editId, setEditId] = useState<number | null>(null);
 
-  // Handle submit button
-  const handleSubmit = () => {
-    if (!enterName.trim()) return; // Prevent empty submissions
-
-    if (editID) {
-      // Update the existing item
-      setList((prev) =>
-        prev.map((item) =>
-          item.id === editID ? { ...item, name: enterName } : item
-        )
-      );
-      setEditID(null); // Reset editing state
-    } else {
-      // Add a new item
-      setList((prev) => [
-        ...prev,
-        { id: Date.now().toString(), name: enterName },
-      ]);
+  const handleDelete = (id: number) => {
+    setData((prev) => prev.filter((item) => item.id !== id));
+    if (editId === id) {
+      setEditId(null);
+      setInputValue("");
     }
-
-    setEnterName(""); // Clear input field
   };
 
-  // Handle delete button
-  const handleDelete = (buttonId: string) => {
-    setList((prev) => prev.filter((item) => item.id !== buttonId));
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) =>
+    setInputValue(event.target.value);
+
+  const handleAdd = () => {
+    if (!inputValue.trim()) return;
+
+    setData((prev) => [
+      ...prev,
+      { id: prev.length + 1, name: inputValue.trim() },
+    ]);
+
+    setInputValue("");
   };
 
-  // Handle edit button
-  const handleEdit = (id: string) => {
-    const itemToEdit = list.find((item) => item.id === id);
+  const handleEdit = (id: number) => {
+    const itemToEdit = data.find((item) => item.id === id);
+
     if (itemToEdit) {
-      setEnterName(itemToEdit.name); // Pre-fill input field with the name
-      setEditID(id); // Set the ID of the item being edited
+      setEditId(id);
+      setInputValue(itemToEdit.name);
+    }
+  };
+
+  const handleUpdate = () => {
+    if (!inputValue.trim()) return;
+    setData((prev) =>
+      prev.map((item) =>
+        item.id === editId ? { ...item, name: inputValue.trim() } : item
+      )
+    );
+    setInputValue("");
+    setEditId(null);
+  };
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
+      editId ? handleUpdate() : handleAdd();
     }
   };
 
   return (
-    <div className="App">
-      <label htmlFor="name">Enter</label>
-      <input
-        name="name"
-        type="text"
-        value={enterName}
-        onChange={handleName}
-        placeholder="Enter a name"
-      />
-      <button onClick={handleSubmit}>{editID ? "Save" : "Submit"}</button>
-      <ul>
-        {list.map((item) => (
-          <div key={item.id}>
-            <li>{item.name}</li>
-            <button onClick={() => handleEdit(item.id)}>Edit</button>
-            <button onClick={() => handleDelete(item.id)}>Delete</button>
-          </div>
+    <div style={styles.app}>
+      <h1 style={styles.heading}>User Manager</h1>
+
+      <label htmlFor="name" style={styles.label}>
+        Enter name:
+      </label>
+      <div style={styles.inputContainer}>
+        <input
+          type="text"
+          id="name"
+          value={inputValue}
+          onChange={handleInputChange}
+          onKeyDown={handleKeyDown}
+          placeholder="Type name..."
+          style={styles.input}
+        />
+        <button
+          onClick={!editId ? handleAdd : handleUpdate}
+          style={{
+            ...styles.button,
+            backgroundColor: editId ? "#28a745" : styles.button.backgroundColor,
+          }}
+        >
+          {editId ? "Update" : "Add"}
+        </button>
+      </div>
+
+      <ul style={styles.list}>
+        {data.map((item) => (
+          <li key={item.id} style={styles.listItem}>
+            {item.name}
+            <div style={styles.itemButtons}>
+              <button
+                style={styles.editButton}
+                onClick={() => handleEdit(item.id)}
+              >
+                Edit
+              </button>
+              <button
+                style={styles.deleteButton}
+                onClick={() => handleDelete(item.id)}
+              >
+                Delete
+              </button>
+            </div>
+          </li>
         ))}
       </ul>
     </div>
