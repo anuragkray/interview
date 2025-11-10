@@ -152,7 +152,7 @@ export default function SimpleToDo() {
       <h1 style={styles.heading}>User Manager</h1>
 
       <label htmlFor="name" style={styles.label}>
-        Enter name:
+        Enter name :
       </label>
       <div style={styles.inputContainer}>
         <input
@@ -199,3 +199,4 @@ export default function SimpleToDo() {
     </div>
   );
 }
+ 
