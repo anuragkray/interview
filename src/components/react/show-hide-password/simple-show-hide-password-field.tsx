@@ -60,7 +60,7 @@ export default function App() {
   return (
     <div style={styles.container}>
       <label htmlFor="password" style={styles.label}>
-        Enter Password
+        Enter Password :
       </label>
 
       <div style={styles.inputContainer}>
