@@ -1,4 +1,4 @@
-const input=[1,1,2,1,3,4,3,5,2,1,5];
+const input = [1, 1, 2, 1, 3, 4, 3, 6, 5, 2, 1, 5];
 //Output [1,2,3,4,5];
 
 function rvsWif(prmtr){
@@ -18,3 +18,21 @@ function rvsWif(prmtr){
     return ary;
 }
 console.log(rvsWif(input));
+
+//OUTPUT:[4,6]
+function cmplteRmvDplct(prmtr) {
+    const ary = [];
+    for (let otr = 0; otr < prmtr.length; otr++) {
+        let count = 0;
+        for (let inr = 0; inr < prmtr.length; inr++) {
+            if (prmtr[otr] === prmtr[inr]) {
+                count++;
+            }
+        }
+        if (count === 1) {
+            ary.push(prmtr[otr])
+        }
+    }
+    return ary;
+}
+console.log(cmplteRmvDplct(input));
