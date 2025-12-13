@@ -36,3 +36,23 @@ function cmplteRmvDplct(prmtr) {
     return ary;
 }
 console.log(cmplteRmvDplct(input));
+
+//INPUT=[1,1,2,1,3,4,2,5,8,8,1,2]
+//OUTPUT=[1,2,8]->Only repeted value
+function olyRptd(param) {
+    const rslt = [];
+    for (let otr = 0; otr < param.length; otr++) {
+        let count = 0;
+        for (let inr = 0; inr < param.length; inr++) {
+            if (param[otr] === param[inr]) {
+                count++
+            }
+        }
+        if (count > 1 && param.indexOf(param[otr]) === otr) {
+            rslt.push(param[otr]);
+        }
+    }
+    return rslt;
+}
+const data = [1, 1, 2, 1, 3, 4, 2, 5, 8, 8, 1, 2]
+console.log(olyRptd(data))
