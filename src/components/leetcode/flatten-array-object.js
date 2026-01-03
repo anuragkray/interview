@@ -52,3 +52,30 @@ function flattenObject(objParams, parentkey = "") {
     }, {})
 }
 console.log(flattenObject(object_1));
+
+//--> ARRAY : 
+const nestedArray = [1, 2, [3, [4, 5, [6, [7]]]]];
+//METHOD_1
+function customNestedArray(value) {
+  const result = (curParam) => {
+    return curParam.reduce((acc, cur) => {
+      Array.isArray(cur) ? acc.push(...result(cur)) : acc.push(cur);
+      return acc;
+    }, []);
+  };
+  return result(value);
+}
+// console.log("Result", customNestedArray(nestedArray));
+
+//METHOD_2
+function customNestedArray_2(value) {
+  const plainArray = [];
+  //Helper Method
+  (function helperNested(helperParam) {
+    helperParam.forEach((element) => {
+      Array.isArray(element) ? helperNested(element) : plainArray.push(element);
+    });
+  })(value);
+  return plainArray;
+}
+// console.log("Result", customNestedArray_2(nestedArray));
