@@ -6,8 +6,8 @@ class Node{
 }
 
 class SingleLinkedList{
-    constructor(head){
-        this.head = head;
+    constructor(){
+        this.head = null;
         this.size = 0;
     }
 
@@ -55,9 +55,37 @@ class SingleLinkedList{
             count++
         }
         previous.next = newNode;
-        newNode.next = current.next
+        newNode.next = current;
         this.size++;
     }
+
+    //Delete operation
+   delete(index = this.size - 1) {
+
+  if (!this.head || this.size === 0) return;
+
+  if (index < 0 || index >= this.size) return;
+
+  if (index === 0) {
+    this.head = this.head.next;
+    this.size--;
+    return;
+  }
+
+  let current = this.head;
+  let previous = null;
+  let count = 0;
+
+  while (count < index) {
+    previous = current;
+    current = current.next;
+    count++;
+  }
+
+  previous.next = current.next;
+  this.size--;
+}
+
 }
 
 const SingleList = new SingleLinkedList();
@@ -67,5 +95,7 @@ SingleList.add(30);
 SingleList.addAtZero(40);
 SingleList.insert("mahakal",1);
 SingleList.insert("shiv",0);
-SingleList.insert("A",10)
+SingleList.insert("A",10);
+console.log(JSON.stringify(SingleList,null,2));
+SingleList.delete(0);
 console.log(JSON.stringify(SingleList,null,2));
