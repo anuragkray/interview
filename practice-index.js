@@ -33,7 +33,15 @@ class SingleLinked{
     }
     //Add Me At Any Index
     addAt(index,value){
-        
+        if(index > this.size || index < 0){
+            console.log("Invalid Index");
+            return
+        }
+
+        if(index === 0){
+            this.addAtZero("Q");
+            return
+        }
         const newNode = new Node(value);
         let current = this.head;
         let previous;
@@ -51,9 +59,11 @@ class SingleLinked{
     }
 }
 const list = new SingleLinked();
+list.addAt(1000,10000);
 list.add(10);
 list.add(20);
 list.add(30);
 list.addAtZero("ADD Me At Zero");
 list.addAt(1,"100")
+list.addAt(0,"A");
 console.log(JSON.stringify(list,null,2));
