@@ -13,22 +13,22 @@ class SingleLinkedList{
 
     //Add At First or Zero Index
     addAtZero(value){
-        let newNode = new Node(value);
-        [this.head, newNode.next] = [newNode,this.head]
+        const node = new Node(value);
+        [this.head, node.next] = [node,this.head]
         this.size++
     }
 
     //Add At Last Index
     add(value){
-        const newNode = new Node(value);
+        const node = new Node(value);
         if(!this.head){
-            this.head = newNode;
+            this.head = node;
         }else{
             let current = this.head;
             while(current.next){
                 current = current.next
             }
-            current.next = newNode;
+            current.next = node;
         }
         this.size++
     }
@@ -45,7 +45,7 @@ class SingleLinkedList{
             this.addAtZero(value);
             return
         }
-        const newNode = new Node(value);
+        const node = new Node(value);
         let current = this.head;
         let previous;
         let count = 0;
@@ -54,8 +54,8 @@ class SingleLinkedList{
             current = current.next;
             count++
         }
-        previous.next = newNode;
-        newNode.next = current;
+        previous.next = node;
+        node.next = current;
         this.size++;
     }
 
