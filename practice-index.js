@@ -2,40 +2,32 @@ class Node{
     constructor(value){
         this.value = value;
         this.next = null;
+        this.prev = null;
     }
 }
+const list = new Node(10);
+console.log("LIST",list);
 
-class SingleList{
+class DoubleList{
     constructor(){
         this.head = null;
+        this.tail = null;
         this.size = 0;
     }
 
-    initial(value){
-        const node = new Node(value);
-        [this.head,node.next]=
-        [node, this.head];
-        this.size++;
-    }
-    //add
+    //Adding 
+    //[prev<--data-->next]
+    
     add(value){
         const node = new Node(value);
         if(!this.head){
             this.head = node;
+            this.tail = node;
         }else{
-            let current = this.head;
-            while(current.next){
-                current = current.next;
-            }
-            current.next = node;
+            node.prev = this.tail;
+            this.tail.next = node;
+            this.tail = node;
         }
-        this.size++
+        this.size++;
     }
 }
-const list = new SingleList()
-list.add(10);
-list.add(20);
-list.initial("Initial");
-list.add(30);
-list.add(40);
-console.log(JSON.stringify(list, null, 2));
