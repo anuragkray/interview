@@ -14,6 +14,7 @@ function characterCount(series) {
 }
 console.log(characterCount(sequence));
 
+//Method 2 Without Inbuilt function
 function characterCount_1(series) {
   let result = {};
   for (let item of series) {
