@@ -1,5 +1,5 @@
 /**
- * Problem: Run-Length Encoding
+ * Problem: Run-Length Encoding Algorithm
  * Input  : AABABBCCC
  * Output : 2A2B3C  (group consecutive same characters and prefix with their count)
  */
