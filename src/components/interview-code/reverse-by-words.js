@@ -21,3 +21,9 @@ function reverseByWords(sentence) {
   return reverseResult;
 }
 console.log(reverseByWords(data));
+
+//Method 2 : Inbuilt Methods
+function reverseByWordsInBuilt(sentence) {
+  return sentence.split(" ").reverse().join(" ");
+}
+console.log(reverseByWordsInBuilt(data));
