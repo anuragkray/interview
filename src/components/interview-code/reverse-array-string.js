@@ -20,29 +20,18 @@ function reverseUsingInBuilt(params) {
 const name_1 = "Mahakal Mahadev Bholenath";
 console.log(reverseUsingInBuilt(name_1));
 
-//Step-2
+//Methods-2
 function inBuilt2(params) {
   return params.split("").reverse().join("");
 }
 console.log(inBuilt2(name_1));
 
-//Reverse String by word
-const name = "Mahakal Mahadev Bholenath";
-
-function reverseByWords(params) {
-  let words = "";
-  let reverseSentence = "";
-
-  for (let index = params.length - 1; index >= 0; index--) {
-    if (params[index] === " ") {
-      reverseSentence += " " + words;
-      words = "";
-    } else {
-      words = params[index] + words;
-    }
+// Methods-3
+const methods3 = (sentence) => {
+  let result = "";
+  for (let char = sentence.length - 1; char >= 0; char--) {
+    result += sentence[char];
   }
-  reverseSentence += " " + words;
-
-  return reverseSentence;
-}
-console.log(reverseByWords(name));
+  return result;
+};
+console.log(methods3(name_1));
