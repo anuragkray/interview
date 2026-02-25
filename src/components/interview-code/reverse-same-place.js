@@ -24,3 +24,12 @@ const withoutInbuiltFun = (sentence) => {
   return result;
 };
 console.log(withoutInbuiltFun(data));
+
+// Methods 2: Using Inbuilt function
+const usingInbuiltFun = (sentence) => {
+  const result = sentence.split(" ").map((word) => {
+    return word.split("").reverse().join("");
+  });
+  return result.join(" ");
+};
+console.log(usingInbuiltFun(data));
