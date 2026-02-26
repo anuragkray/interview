@@ -17,3 +17,8 @@ const withoutInbuiltMethod = (parameter) => {
   console.log(result);
 };
 withoutInbuiltMethod(data);
+
+// From Array
+const arrayData = [1, 2, 1, 3, 5, 3, 4];
+const result = [...new Set(arrayData)];
+console.log(result);
